@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 import roslib, rospy
-import std_msgs
+from motion_analysis.msg import StringWithHeader
 
-publisher = None
 topic = ''
 
 def init():
@@ -10,13 +9,13 @@ def init():
     rospy.init_node('motion_analysis_consumer')
     print "Do not forget to assign the correct image topic for motion analysis!"
     topic = rospy.get_param("~topic", "/motion_analysis/event/human_transfer")
-    rospy.Subscriber(topic, std_msgs.msg.String, stringCallback)
+    rospy.Subscriber(topic, StringWithHeader, stringCallback)
     print "Subscribed to",topic,"..."
     while not rospy.is_shutdown():  
         rospy.spin()
 
 def stringCallback(msg):
-    print msg.data
+    print msg.event
 
 
 if __name__ == '__main__':
