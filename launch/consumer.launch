@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<launch>
+
+	<node pkg="image_view" type="image_view" respawn="false" name="image_view" output="screen" args="image:=/motion_analysis/motion_analysis_viz">
+        </node>
+
+
+	<node pkg="motion_analysis_consumer" type="consumer.py" respawn="false" name="motion_analysis_consumer" output="screen">
+		<rosparam file="$(find motion_analysis_consumer)/config/parameters.yaml" command="load" />
+	</node>
+
+</launch>
